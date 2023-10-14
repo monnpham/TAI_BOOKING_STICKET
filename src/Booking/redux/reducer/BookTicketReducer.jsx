@@ -19,8 +19,7 @@ export let BookTicketReducer = (state = initialState, { type, payload }) => {
         }
         case XOA: {
             state.index = payload.index
-
-
+            state.dataBook = payload.bookstick
             return { ...state }
         }
         default:

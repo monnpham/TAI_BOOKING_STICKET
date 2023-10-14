@@ -38,7 +38,7 @@ export default function List({
                 if (bookstick[i].danhSachGhe[j].soGhe === idGhe) {
                     if (bookstick[i].danhSachGhe[j].daDat === true) {
                         bookstick[i].danhSachGhe[j].daDat = false
-                        handleXoaChon(idGhe)
+                        handleXoaChon(idGhe, bookstick)
                         break
                     }
                     break

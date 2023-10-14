@@ -1,5 +1,6 @@
 import './App.css';
 import Booking from './Booking/Booking';
+import './Booking/style.css'
 
 function App() {
   return (

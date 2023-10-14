@@ -13,9 +13,6 @@ function Booking(props) {
 
     return (
         <div
-            style={{
-                backgroundImage: `url(${bgmovie})`,
-            }}
             className='bg_container'
         >
             <div className="row pt-4">
@@ -51,10 +48,14 @@ let mapDispatchToProps = (dispatch) => {
             }
             dispatch(action)
         },
-        handleXoaChon: (index) => {
+        handleXoaChon: (index, bookstick) => {
             let action = {
                 type: XOA,
-                payload: index
+                payload: {
+                    index: index,
+                    bookstick: bookstick,
+
+                }
             }
             dispatch(action)
         },

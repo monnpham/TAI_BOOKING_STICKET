@@ -4,9 +4,9 @@ export default function Form() {
     return (
         <div className='container'>
             <h1>Danh Sách Ghế Bạn Chọn</h1>
-            <div className="seat">
-                <tr><td className="seat-button"></td><td>Ghế Đã Đặt</td></tr>
-                <tr><td className="seat-button"></td><td>Ghế Đang Chọn</td></tr>
+            <div className="seat text-dark">
+                <tr><td className="seat-button gheDaDat"></td><td>Ghế Đã Đặt</td></tr>
+                <tr><td className="seat-button gheDaChon "></td><td>Ghế Đang Chọn</td></tr>
                 <tr><td className="seat-button"></td><td>Ghế Trống</td></tr>
             </div>
             <table className='table_form'>
