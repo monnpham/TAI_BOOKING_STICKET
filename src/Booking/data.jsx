@@ -29,7 +29,7 @@ export let data = [
             { "soGhe": "A7", "gia": 75000, "daDat": false },
             { "soGhe": "A8", "gia": 75000, "daDat": false },
             { "soGhe": "A9", "gia": 75000, "daDat": false },
-            { "soGhe": "A10", "gia": 75000, "daDat": false },
+            { "soGhe": "A10", "gia": 75000, "daDat": true },
             { "soGhe": "A11", "gia": 0, "daDat": true },
             { "soGhe": "A12", "gia": 0, "daDat": true }
         ]

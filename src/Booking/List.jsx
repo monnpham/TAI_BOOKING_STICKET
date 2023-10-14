@@ -1,15 +1,53 @@
-import React from 'react'
-import { connect } from 'react-redux';
-import { setUserAction } from './redux/action/user';
+import React, { useState } from 'react'
+import { connect, useSelector } from 'react-redux';
+import { BOOK_STICK } from './redux/constant/constant';
 
 
-function List({
+
+
+export default function List({
     array,
     setArray,
     bookstick,
     setBookstick,
-    handleThemGhe
+    handleChonGhe,
+    handleXoaChon,
 }) {
+
+
+    let handleThemGhe = (idGhe, bookstick) => {
+        for (var i = 1; i < bookstick.length; i++) {
+            for (var j = 0; j < bookstick[i].danhSachGhe.length; j++) {
+                if (bookstick[i].danhSachGhe[j].soGhe === idGhe) {
+                    if (bookstick[i].danhSachGhe[j].daDat === false) {
+                        bookstick[i].danhSachGhe[j].daDat = true
+                        handleChonGhe(bookstick[i].danhSachGhe[j], idGhe, bookstick[i].danhSachGhe[j])
+                        break
+                    }
+                    break
+                }
+            }
+        }
+        setBookstick(bookstick)
+        renderGhe(bookstick)
+    }
+
+    let handleXoa = (idGhe, bookstick) => {
+        for (var i = 1; i < bookstick.length; i++) {
+            for (var j = 0; j < bookstick[i].danhSachGhe.length; j++) {
+                if (bookstick[i].danhSachGhe[j].soGhe === idGhe) {
+                    if (bookstick[i].danhSachGhe[j].daDat === true) {
+                        bookstick[i].danhSachGhe[j].daDat = false
+                        handleXoaChon(idGhe)
+                        break
+                    }
+                    break
+                }
+            }
+        }
+        setBookstick(bookstick)
+        renderGhe(bookstick)
+    }
 
     let renderGhe = (array) => {
         return array.map((item) => (
@@ -20,17 +58,22 @@ function List({
                         ghe.daDat === true ?
                             <td key={ghe.soGhe}>
                                 <button
-                                    className="seat-button gheDaChon">{ghe.soGhe}</button>
+                                    onClick={() => { handleXoa(ghe.soGhe, bookstick) }}
+                                    className="seat-button gheDaChon">{ghe.soGhe}
+                                </button>
                             </td>
                             :
                             <td key={ghe.soGhe}>
-                                <button onClick={() => { handleThemGhe(ghe.soGhe, bookstick) }} className="seat-button gheTrong">{ghe.soGhe}</button>
+                                <button
+                                    onClick={() => { handleThemGhe(ghe.soGhe, bookstick) }}
+                                    className="seat-button gheTrong">
+                                    {ghe.soGhe}
+                                </button>
                             </td>
                     ))}
             </tr>
         ))
     }
-
     return (
         <div className='container'>
             <h1>ĐẶT VÉ XEM PHIM</h1>
@@ -49,20 +92,9 @@ function List({
                     ))}
                 </thead>
                 <tbody>
-                    {renderGhe(array)}
-
+                    {renderGhe(bookstick)}
                 </tbody>
             </table>
         </div>
     )
 }
-
-let mapDispatchToProps = (dispatch) => {
-    return {
-        handleSetUser: () => {
-            dispatch(setUserAction())
-        },
-
-    }
-}
-export default connect(null, mapDispatchToProps)(List)

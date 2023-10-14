@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import { userReducer } from "./userReducer";
+import { BookTicketReducer } from "./BookTicketReducer";
 
-export let rootReducer = combineReducers({ userReducer })
+export let rootReducer = combineReducers({ BookTicketReducer })

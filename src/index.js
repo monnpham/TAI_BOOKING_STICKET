@@ -1,23 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import { rootReducer } from './Booking/redux/reducer/rootReducer';
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+// import { BookTicketReducer } from "./BookTicket/redux/reducer/reducer";
+import { BookTicketReducer } from "./Booking/redux/reducer/BookTicketReducer";
+import { createStore } from "redux";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-//tao store 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(
-  rootReducer,
-  /**preloadedState */ composeEnhancers(applyMiddleware(thunk))
-
-)
-
+const root = ReactDOM.createRoot(document.getElementById("root"));
+let store = createStore(
+  BookTicketReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 root.render(
   <Provider store={store}>
     <App />

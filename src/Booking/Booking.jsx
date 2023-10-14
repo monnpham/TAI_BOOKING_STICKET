@@ -3,21 +3,13 @@ import bgmovie from './bgmovie.jpg';
 import './style.css';
 import List from './List';
 import Form from './Form';
-import { connect } from 'react-redux';
-import { setUserAction } from './redux/action/user';
-
+import { connect, useSelector } from 'react-redux';
+import { ADD_LIST, BOOK_STICK, CHON, XOA } from './redux/constant/constant';
+import { data } from './data';
 function Booking(props) {
-    const [array, setArray] = useState(props.array);
-    const [bookstick, setBookstick] = useState(props.dataBook);
-
-    let handleThemGhe = (idGhe, bookstick) => {
-        const ghe = bookstick.danhSachGhe.find((ghe) => ghe.soGhe === idGhe);
-        console.log("🚀 ~ file: Booking.jsx:16 ~ handleThemGhe ~ ghe:", ghe)
-        if (ghe) {
-            ghe.daDat = true;
-            return setArray(bookstick);
-        }
-    }
+    const [array, setArray] = useState(data);
+    let dataBook = useSelector((state) => state.dataBook);
+    const [bookstick, setBookstick] = useState(dataBook);
 
     return (
         <div
@@ -33,7 +25,8 @@ function Booking(props) {
                         setArray={setArray}
                         bookstick={bookstick}
                         setBookstick={setBookstick}
-                        handleThemGhe={handleThemGhe}
+                        handleChonGhe={props.handleChonGhe}
+                        handleXoaChon={props.handleXoaChon}
                     />
 
                 </div>
@@ -44,19 +37,29 @@ function Booking(props) {
         </div>
     );
 }
-let mapStateToProps = (state) => {
-    return {
-        array: state.userReducer.data,
-        dataBook: state.userReducer.dataBook
-    }
-}
+
 let mapDispatchToProps = (dispatch) => {
     return {
-        handleSetUser: () => {
-            dispatch(setUserAction())
+        handleChonGhe: (item, index, bookstick) => {
+            let action = {
+                type: CHON,
+                payload: {
+                    bookstick: bookstick,
+                    item: item,
+                    index: index
+                }
+            }
+            dispatch(action)
+        },
+        handleXoaChon: (index) => {
+            let action = {
+                type: XOA,
+                payload: index
+            }
+            dispatch(action)
         },
 
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Booking)
+export default connect(null, mapDispatchToProps)(Booking)
