@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import bgmovie from './bgmovie.jpg';
 import './style.css';
 import List from './List';
-import Form from './Form';
+import DetailBooking from './DetailBooking';
 import { connect, useSelector } from 'react-redux';
-import { ADD_LIST, BOOK_STICK, CHON, XOA } from './redux/constant/constant';
+import { ADD_LIST, DELETE, CHON, XOA } from './redux/constant/constant';
 import { data } from './data';
 function Booking(props) {
     const [array, setArray] = useState(data);
     let dataBook = useSelector((state) => state.dataBook);
     const [bookstick, setBookstick] = useState(dataBook);
+    let stick = useSelector((state) => state.arrchon);
 
     return (
         <div
@@ -24,11 +25,17 @@ function Booking(props) {
                         setBookstick={setBookstick}
                         handleChonGhe={props.handleChonGhe}
                         handleXoaChon={props.handleXoaChon}
+
                     />
 
                 </div>
                 <div className="col-4">
-                    <Form />
+                    <DetailBooking
+                        handleDeleteStick={props.handleDeleteStick}
+                        bookstick={bookstick}
+                        setBookstick={setBookstick}
+                        stick={stick}
+                    />
                 </div>
             </div>
         </div>
@@ -55,6 +62,16 @@ let mapDispatchToProps = (dispatch) => {
                     index: index,
                     bookstick: bookstick,
 
+                }
+            }
+            dispatch(action)
+        },
+        handleDeleteStick: (index, arrchon) => {
+            let action = {
+                type: DELETE,
+                payload: {
+                    index: index,
+                    arrchon: arrchon,
                 }
             }
             dispatch(action)
